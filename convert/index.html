@@ -5,6 +5,11 @@
   <meta charset="utf-8">
   <title>转换</title>
   <style>
+    ::-webkit-scrollbar{overflow:visible;height: 10px;background:transparent;}
+    ::-webkit-scrollbar-thumb{background-color:rgba(0, 0, 0, .3);border-top:1px solid rgba(0,0,0,.2);}
+    ::-webkit-scrollbar-thumb:hover{background-color:rgba(0, 0, 0, .5);}
+    ::-webkit-scrollbar-track-piece{background:#ccc;}
+    ::-webkit-scrollbar-corner{background:transparent;}
     @font-face {
       font-family: 'menksoft';
       src:local('menksoft2007'),url("./fonts/menksoft2007.ttf") format("truetype");
@@ -37,8 +42,8 @@
       -webkit-writing-mode: vertical-lr;
       -webkit-text-orientation: sideways-right;
       vertical-align: top;
-      overflow-x:hidden;
-      overflow-y:hidden;
+      overflow-x:scroll;
+      /*overflow-y:hidden;*/
     }
     .menksoft_text{
       font-family:'menksoft';
@@ -116,6 +121,13 @@ $(function(){
       var text = menk2U(source_text);
       _target.html(text);
     })
+  
+  $('.text_editor').on('paste',function(e){
+    e.preventDefault();
+    var html = e.originalEvent.clipboardData.getData('text/plain');
+    // var text = html.replace(/<\/?[^>]+>/g,'');
+    $(this).html(html);
+  })
 });
 </script>
 </body>
