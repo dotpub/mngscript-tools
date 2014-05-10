@@ -1,0 +1,120 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>转换</title>
+  <style>
+    @font-face {
+      font-family: 'menksoft';
+      src:local('menksoft2007'),url("./fonts/menksoft2007.ttf") format("truetype");
+    }
+    @font-face {
+      font-family:"unicode";
+      src:local('Baga Chagan'),url("./fonts/BagaChaganL.ttf") format("truetype");
+    }
+    *{
+      outline: none;
+    }
+    body{
+      margin:0;
+      padding:0;
+      
+    }
+    .demo_container{
+      margin:30px 0 0 50px;
+    }
+    .editor_wrap{
+      display: inline-block;
+      margin:3px 10px;
+    }
+    .text_editor{
+      border:1px solid #ccc;
+      padding:6px;
+      font-size:18px;
+      width: 400px;
+      height:600px;
+      -webkit-writing-mode: vertical-lr;
+      -webkit-text-orientation: sideways-right;
+      vertical-align: top;
+    }
+    .menksoft_text{
+      font-family:'menksoft';
+    }
+    .unicode_text{
+      font-family: 'unicode';
+    }
+    .btn_wrap{
+      margin-top:10px;
+    }
+    .btn_wrap input{
+      border:0px;
+      line-height: 30px;
+      padding:0 20px;
+      background-color:#ccc;
+    }
+    .btn_wrap input:focus{
+      background-color: blue;
+      color:#fff;
+    }
+    .unicode_wrap .btn_wrap input{
+      float: left;
+    }
+    .menksoft_wrap .btn_wrap input{
+      float: right;
+    }
+    .editor_tit{
+      margin-bottom:5px;
+    }
+    .editor_tit .tit{
+      font-size:18px;
+      color: #666;
+    }
+    .editor_tit .tit i{
+      color:#000;
+      font-weight:bold;
+    }
+  </style>
+  <script src="http://www.boljoo.com/statics/js/mglportal_js/jquery-1.8.3.min.js"></script>
+  <script src="conver.js"></script>
+</head>
+<body>
+  <div class="demo_container">
+    <div class="editor_wrap menksoft_wrap">
+      <div class="editor_tit">
+        <span class="tit">Source : '<i>menksoft</i>' </span>
+      </div>
+      <div contenteditable="true" class="text_editor menksoft_text">
+         
+      </div>
+      <div class="btn_wrap">
+        <input type="button" value="to unicode ->" action-to="unicode">
+      </div>
+    </div>
+    <div class="editor_wrap unicode_wrap">
+      <div class="editor_tit">
+        <span class="tit">Source : '<i>unicode'</i></span>
+      </div>
+      <div contenteditable="true" class="text_editor unicode_text">
+        ᠣᠯᠠᠨ ᠤᠯᠤᠰ ᠣᠨ ᠪᠠᠷᠢᠮᠵᠢᠶᠠᠠ
+      </div>
+      <div class="btn_wrap" style="display:none;">
+        <input type="button" value="<- to menksoft " action-to="menksoft">
+      </div>
+    </div>
+  </div>
+<script>
+
+$(function(){
+  $('.btn_wrap').
+    on('click','input',function(e){
+      var to = $(this).attr('action-to');
+      var source_text = $(this).parent('.btn_wrap').prev('.text_editor').html();
+      var _target = $('.text_editor.'+to+'_text');
+      var text = menk2U(source_text);
+      _target.html(text);
+    })
+});
+</script>
+</body>
+</html>
